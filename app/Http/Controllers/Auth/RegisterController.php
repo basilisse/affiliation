@@ -58,7 +58,7 @@ class RegisterController extends Controller
           'password' => ['required', 'string', 'min:8', 'confirmed'],
           'password_confirmation' => ['required', 'string', 'min:8'],
           'role' => ['nullable', 'string'],
-          'parrain_code' => ['required', 'string', 'max:255'],
+          'parrain_code' => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -74,6 +74,7 @@ class RegisterController extends Controller
       $parrain_code = $data['parrain_code'] ?? '';
       $parrain_id = null;
       $niveau = 1;
+      $parrain = null;
       if ($parrain_code) {
         $parrain = User::where('invitation_code', $parrain_code)->first();
         if ($parrain != null) {
